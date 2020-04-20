@@ -1,0 +1,72 @@
+﻿<Window x:Class="WpfApplication102.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfApplication102"
+        Title="MainWindow" Height="220" Width="250">
+    
+    <StackPanel>
+
+        <TreeView x:Name="treeView" ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Families}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:Family}" ItemsSource="{Binding Members}" >
+                    <CheckBox Content="{Binding Name}" IsChecked="{Binding Path=(local:ItemHelper.IsChecked), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                        <CheckBox.Style>
+                            <Style TargetType="{x:Type CheckBox}">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=(local:ItemHelper.IsChecked)}" Value="False" >
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                    </CheckBox>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type local:Person}" ItemsSource="{Binding Members}" >
+                    <CheckBox Content="{Binding Name}" IsChecked="{Binding Path=(local:ItemHelper.IsChecked), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                        <CheckBox.Style>
+                            <Style TargetType="{x:Type CheckBox}">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=(local:ItemHelper.IsChecked)}" Value="False" >
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                    </CheckBox>
+                </HierarchicalDataTemplate>
+
+                <DataTemplate DataType="{x:Type local:Children}" >
+                    <CheckBox Content="{Binding Name}" IsChecked="{Binding Path=(local:ItemHelper.IsChecked), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                        <CheckBox.Style>
+                            <Style TargetType="{x:Type CheckBox}">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=(local:ItemHelper.IsChecked)}" Value="False" >
+                                        <Setter Property="Foreground" Value="LightGray"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                    </CheckBox>
+                </DataTemplate>
+            </TreeView.Resources>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+
+        <Button Content="?" Click="Button_PrintCrew_Click" />
+
+        <TextBlock x:Name="textBoxCrew"/>
+
+    </StackPanel>
+
+</Window>
